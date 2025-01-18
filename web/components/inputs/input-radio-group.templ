@@ -1,0 +1,53 @@
+package inputs
+
+type InputRadioOption struct {
+    IsChecked bool
+    Value string
+    Label string
+    Description string
+}
+
+type InputRadioGroupProps struct {
+    Name string
+    Label string
+    Selected string
+    Values []InputRadioOption
+    IsVertical bool
+}
+
+templ InputRadioGroup(props InputRadioGroupProps) {
+    if props.Label != "" {
+        <p class="pl-1 text-sm font-semibold mb-1 inline-block">{ props.Label }</p>
+    }
+    <div class={"flex flex-wrap", templ.KV("items-center", !props.IsVertical), "gap-8", templ.KV("flex-col", props.IsVertical)}>
+        for _, option := range props.Values {
+            <div class="flex gap-2 cursor-pointer">
+                <input
+                type="radio"
+                name={ props.Name }
+                id={ option.Value }
+                value={ option.Value }
+                class="!text-primary-light w-5 h-5 !bg-[length:1.25em_1.25em] translate-y-1 cursor-pointer"
+                if option.IsChecked {
+                    checked
+                }
+                >
+                <label 
+                for={ option.Value }
+                if option.IsChecked{
+                    class="text-neutral-700 cursor-pointer"
+                } else {
+                    class="text-neutral-400 cursor-pointer"
+                }
+                >
+                { option.Label }
+                if option.Description != "" {
+                    <span class="pt-1 text-xs text-neutral-500 block">
+                        { option.Description }
+                    </span>
+                }
+                </label>
+            </div>
+        }
+    </div>
+}

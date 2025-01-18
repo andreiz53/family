@@ -1,0 +1,45 @@
+package inputs
+
+type InputSelectOption struct {
+	Value string
+	Text  string
+}
+
+type InputSelectProps struct {
+	Name     string
+	Values   []InputSelectOption
+	Error    string
+	Selected string
+	Label string
+}
+
+templ InputSelect(props InputSelectProps) {
+	<div>
+		<label
+			class="pl-1 text-sm font-semibold mb-1 inline-block"
+			for={ props.Name }>
+				{ props.Label }
+		</label>
+		<select
+			name={ props.Name }
+			id={ props.Name }
+			required
+			class="border border-solid border-neutral-200 px-4 py-2 rounded-md w-full focus:border-primary-light focus:shadow-none focus:outline-none focus-visible:border-primary-light focus-visible:shadow-none focus-visible:outline-none"
+		>
+			if props.Selected == "" {
+				<option disabled selected value="">Unassigned</option>
+			}
+			for _, opt := range props.Values {
+
+				<option
+					value={ opt.Value }
+					if opt.Value == props.Selected {
+						selected
+					}
+				>
+					{ opt.Text }
+				</option>
+			}
+		</select>
+	</div>
+}

@@ -1,0 +1,22 @@
+package inputs
+
+type InputCheckboxProps struct {
+	Name      string
+	IsChecked bool
+	Label     string
+}
+
+templ InputCheckbox(props InputCheckboxProps) {
+	<div class="flex items-center gap-2">
+		<input
+			class="rounded-sm accent-primary-light text-primary-light focus:ring-primary-light"
+			type="checkbox"
+			name={ props.Name }
+			id={ props.Name }
+			if props.IsChecked {
+				checked
+			}
+		/>
+		<label class="text-sm text-neutral-700" for={ props.Name }>{ props.Label }</label>
+	</div>
+}

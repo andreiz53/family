@@ -1,0 +1,16 @@
+package pages
+
+import (
+    "family/web/layout"
+    "family/types"
+    "family/web/components/forms"
+)
+
+templ Login() {
+    @layout.Base() {
+        <div class="w-full max-w-lg mx-auto my-14">
+            <h1 class="font-semibold text-xl mb-4">Log into your account</h1>
+            @forms.LoginForm(types.LoginUserValues{}, types.LoginUserErrors{})
+        </div>
+    }
+}

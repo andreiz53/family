@@ -1,0 +1,33 @@
+package inputs
+
+type InputTextareaProps struct {
+    Name string
+    Label string
+    Value string
+    Placeholder string
+    Required bool
+    Rows string
+}
+
+
+templ InputTextarea(props InputTextareaProps) {
+    <div>
+        <label
+            class="pl-1 text-sm font-semibold mb-1 inline-block"
+            for={ props.Name }>
+                { props.Label }
+                if props.Required {
+                    <span class="text-error">*</span>
+                }
+        </label>
+        <textarea 
+        name={ props.Name } 
+        id={ props.Name } 
+        placeholder={ props.Placeholder }
+        class="w-full resize-none rounded-lg border border-solid border-neutral-200 focus:ring-primary-light p-2 text-sm"
+        rows={ props.Rows }
+        >
+        { props.Value }
+        </textarea>
+    </div>
+}

@@ -1,0 +1,36 @@
+package inputs
+
+type InputProps struct {
+	Type        string
+	Name        string
+	Value       string
+	Error       string
+	Placeholder string
+	Label templ.Component
+	Required bool
+	Step string
+
+}
+
+templ Input(props InputProps) {
+	<label
+		class="input input-bordered flex items-center gap-2"
+		for={ props.Name }>
+		@props.Label
+		<input
+			id={ props.Name }
+			type={ props.Type }
+			name={ props.Name }
+			value={ props.Value }
+			placeholder={ props.Placeholder }
+			autocomplete="off"
+			class="grow"
+			if props.Step != "" {
+				step={props.Step}
+			}
+		/>
+		if props.Error != "" {
+			@InputError(props.Error)
+		}
+	</label>
+}

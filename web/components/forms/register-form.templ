@@ -1,0 +1,36 @@
+package forms
+
+import (
+    "family/types"
+    "family/web/components/inputs"
+    "family/web/components/icons"
+)
+
+templ RegisterForm(values types.RegisterUserValues, errors types.RegisterUserErrors) {
+    <form 
+        class="grid gap-4"
+        hx-post="/register"
+        hx-swap="outerHTML"
+    >
+        @inputs.Input(inputs.InputProps{
+            Type: "text",
+            Name: "email",
+            Value: values.Email,
+            Error: errors.Email,
+            Placeholder: "Email",
+            Label: icons.IconEmail(),
+        })
+        @inputs.Input(inputs.InputProps{
+            Type: "password",
+            Name: "password",
+            Value: values.Password,
+            Error: errors.Password,
+            Placeholder: "Password",
+            Label: icons.IconPassword(),
+        })
+        if errors.Other != "" {
+            @inputs.InputError(errors.Other)
+        }
+        <button type="submit" class="btn btn-secondary font-semibold">Submit</button>
+    </form>
+}

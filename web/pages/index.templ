@@ -1,0 +1,17 @@
+package pages
+
+import (
+    "family/web/layout"
+    "family/web/utils"
+)
+
+templ Index() {
+    @layout.Base() {
+        <h1>Hello from index</h1>
+        if webUtils.LoggedIn(ctx) {
+            <p>Logged in: { webUtils.User(ctx).Email }</p>
+        } else {
+            <p>Not logged in</p>
+        }
+    }
+}
