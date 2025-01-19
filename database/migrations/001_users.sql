@@ -5,7 +5,7 @@ CREATE TABLE users (
     password TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT NOW() NOT NULL,
     updated_at TIMESTAMP DEFAULT NOW() NOT NULL,
-    deleted_at TIMESTAMP WITH TIME ZONE
+    deleted_at TIMESTAMP 
 );
 
 

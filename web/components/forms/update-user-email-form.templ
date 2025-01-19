@@ -1,0 +1,26 @@
+package forms
+
+import "family/types"
+import "family/web/components/inputs"
+import "family/web/components/icons"
+
+templ UpdateUserEmailForm(values types.UpdateUserEmailValues, errors types.UpdateUserEmailErrors) {
+	<form
+		class="grid gap-2"
+		hx-put="/account/settings/email"
+		hx-swap="outerHTML"
+	>
+		@inputs.Input(inputs.InputProps{
+			Type:        "email",
+			Name:        "email",
+			Value:       values.Email,
+			Error:       errors.Email,
+			Placeholder: "Email",
+			Label:       icons.IconEmail(),
+		})
+		if errors.Other != "" {
+			@inputs.InputError(errors.Other)
+		}
+		<button type="submit" class="btn btn-secondary font-semibold">Update</button>
+	</form>
+}

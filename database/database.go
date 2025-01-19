@@ -1,31 +1,39 @@
 package database
 
 import (
-	"database/sql"
-	database "family/database/handlers"
-	"fmt"
+	"context"
 	"log"
-	"os"
+
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgtype"
+
+	database "family/database/handlers"
 )
 
-func NewDatabase() *database.Queries {
+type Storage interface {
+	CreateUser(context.Context, database.CreateUserParams) (database.User, error)
+	GetUsers(context.Context) ([]database.User, error)
+	GetUserByEmail(context.Context, string) (database.User, error)
+	GetUserByID(context.Context, pgtype.UUID) (database.User, error)
+	DeleteUserByID(context.Context, pgtype.UUID) error
+	DeleteUserByEmail(context.Context, string) error
+	UpdateUserEmail(context.Context, database.UpdateUserEmailParams) error
+	UpdateUserPassword(context.Context, database.UpdateUserPasswordParams) error
+}
 
-	user := os.Getenv("DB_USER")
-	password := os.Getenv("DB_PASSWORD")
-	host := os.Getenv("DB_HOST")
-	port := os.Getenv("DB_PORT")
-	name := os.Getenv("DB_NAME")
+type Database struct {
+	Queries *database.Queries
+}
 
-	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", user, password, host, port, name))
+func NewDatabase(url string) Database {
+
+	db, err := pgx.Connect(context.Background(), url)
 	if err != nil {
 		log.Fatal("could not connect to database", err)
 	}
-
 	queries := database.New(db)
 
-	db.SetConnMaxLifetime(0)
-	db.SetMaxIdleConns(50)
-	db.SetMaxOpenConns(50)
-
-	return queries
+	return Database{
+		Queries: queries,
+	}
 }

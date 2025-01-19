@@ -4,12 +4,13 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"family/cookies"
-	"family/types"
 	"net/http"
 	"time"
 
 	"github.com/a-h/templ"
+
+	"family/cookies"
+	"family/types"
 )
 
 func RenderComponent(w http.ResponseWriter, r *http.Request, component templ.Component) {
@@ -53,6 +54,12 @@ func (s Server) getAuthenticatedUser(r *http.Request) types.AuthenticatedUser {
 		return types.AuthenticatedUser{}
 	}
 	return user
+}
+
+func (s Server) updateAuthenticatedUser(w http.ResponseWriter, r *http.Request, user types.AuthenticatedUser) {
+	userSession := s.cookieStore.GetUserSession(r)
+	userSession.Values[cookies.UserKey] = user
+	userSession.Save(r, w)
 }
 
 func (s Server) logoutUser(w http.ResponseWriter, r *http.Request) {

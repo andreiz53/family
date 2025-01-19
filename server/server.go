@@ -2,22 +2,26 @@ package server
 
 import (
 	"fmt"
-	"family/cookies"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+
+	"family/cookies"
+	"family/database"
 )
 
 type Server struct {
 	listenAddr  string
 	cookieStore cookies.CookieStore
+	store       database.Storage
 }
 
-func NewServer(addr string, cs cookies.CookieStore) Server {
+func NewServer(addr string, cs cookies.CookieStore, store database.Storage) Server {
 	return Server{
 		listenAddr:  addr,
 		cookieStore: cs,
+		store:       store,
 	}
 }
 
@@ -42,6 +46,9 @@ func (s Server) Init() {
 	accountRouter.Use(s.WithAuth)
 	accountRouter.Post("/logout", s.handleLogout)
 	accountRouter.Get("/settings", s.renderAccountSettings)
+	accountRouter.Put("/settings/email", s.handleUpdateUserEmail)
+	accountRouter.Put("/settings/password", s.handleUpdateUserPassword)
+	accountRouter.Delete("/", s.handleDeleteUser)
 
 	router.Mount("/account", accountRouter)
 

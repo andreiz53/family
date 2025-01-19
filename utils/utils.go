@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"log"
 	"reflect"
+	"time"
 
 	"github.com/gobeam/stringy"
+	"github.com/jackc/pgx/v5/pgtype"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -58,6 +60,15 @@ func BoolToCheckboxValue(val bool) string {
 	}
 	return ""
 }
+
 func CheckboxValueToBool(val string) bool {
 	return val == "on"
+}
+
+func NullTime(pgTime pgtype.Timestamp) *time.Time {
+	var t *time.Time
+	if pgTime.Valid {
+		t = &pgTime.Time
+	}
+	return t
 }

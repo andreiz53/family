@@ -9,10 +9,13 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
+	"family/web/components/forms"
 	"family/web/layout"
+
+	"family/types"
 )
 
-func AccountSettings() templ.Component {
+func AccountSettings(user types.User) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -45,7 +48,23 @@ func AccountSettings() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<h1>Hello from account settings</h1>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"max-w-xl mx-auto my-14 w-full\"><h1 class=\"font-semibold text-2xl mb-12\">Update your account settings</h1><h2 class=\"font-semibold text-xl mb-4 pb-4 border-b border-solid border-base\">Email</h2>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = forms.UpdateUserEmailForm(types.UpdateUserEmailValues{Email: user.Email}, types.UpdateUserEmailErrors{}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<h2 class=\"font-semibold text-xl mt-8 mb-4 pb-4 border-b border-solid border-base\">Password</h2>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = forms.UpdateUserPasswordForm(types.UpdateUserPasswordValues{}, types.UpdateUserPasswordErrors{}).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<h2 class=\"font-semibold text-xl mt-8 mb-4 pb-4 border-b border-solid border-base\">Actions</h2><button hx-delete=\"/account\" class=\"btn btn-error\">Delete account</button></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
