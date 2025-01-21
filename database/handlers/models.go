@@ -8,6 +8,14 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
+type RecipeItem struct {
+	ID        pgtype.UUID
+	CreatedAt pgtype.Timestamp
+	UpdatedAt pgtype.Timestamp
+	DeletedAt pgtype.Timestamp
+	Name      string
+}
+
 type User struct {
 	ID        pgtype.UUID
 	Email     string

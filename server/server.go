@@ -52,6 +52,18 @@ func (s Server) Init() {
 
 	router.Mount("/account", accountRouter)
 
+	recipeRouter := chi.NewRouter()
+	recipeRouter.Get("/create", s.renderRecipeCreate)
+
+	router.Mount("/recipe", recipeRouter)
+
+	recipeItemRouter := chi.NewRouter()
+	recipeItemRouter.Get("/", s.renderIngredientsIndex)
+	recipeItemRouter.Get("/new", s.renderIngredientCreate)
+	recipeItemRouter.Post("/new", s.handleCreateRecipeItem)
+
+	router.Mount("/ingredients", recipeItemRouter)
+
 	fmt.Printf("Server starting on port %s\n", s.listenAddr)
 	http.ListenAndServe(s.listenAddr, router)
 }

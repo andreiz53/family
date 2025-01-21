@@ -1,0 +1,15 @@
+package ingredientsPages
+
+import "family/web/layout"
+import "family/types"
+
+templ IngredientsIndex(recipeItems []types.RecipeItem) {
+	@layout.Base() {
+		<h1>Hello from ingredients index</h1>
+		for _ , recipeItem := range recipeItems {
+			<p>
+				{ recipeItem.Name }
+			</p>
+		}
+	}
+}

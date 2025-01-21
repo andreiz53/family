@@ -1,0 +1,14 @@
+package ingredientsPages
+
+import "family/web/layout"
+import "family/web/components/forms"
+import "family/types"
+
+templ IngredientCreate() {
+	@layout.Base() {
+		<div class="w-full max-w-xl my-14 mx-auto">
+			<h1 class="text-xl font-semibold mb-4">Create a new ingredient</h1>
+			@forms.CreateRecipeItemForm(types.CreateRecipeItemValues{}, types.CreateRecipeItemErrors{})
+		</div>
+	}
+}

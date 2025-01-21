@@ -11,6 +11,11 @@ import (
 )
 
 type Storage interface {
+	UserStorage
+	RecipeItemStorage
+}
+
+type UserStorage interface {
 	CreateUser(context.Context, database.CreateUserParams) (database.User, error)
 	GetUsers(context.Context) ([]database.User, error)
 	GetUserByEmail(context.Context, string) (database.User, error)
@@ -19,6 +24,14 @@ type Storage interface {
 	DeleteUserByEmail(context.Context, string) error
 	UpdateUserEmail(context.Context, database.UpdateUserEmailParams) error
 	UpdateUserPassword(context.Context, database.UpdateUserPasswordParams) error
+}
+
+type RecipeItemStorage interface {
+	CreateRecipeItem(context.Context, string) error
+	DeleteRecipeItem(context.Context, pgtype.UUID) error
+	GetRecipeItemByID(context.Context, pgtype.UUID) (database.RecipeItem, error)
+	GetRecipeItems(context.Context) ([]database.RecipeItem, error)
+	UpdateRecipeItem(context.Context, string) error
 }
 
 type Database struct {

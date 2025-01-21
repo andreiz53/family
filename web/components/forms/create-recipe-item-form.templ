@@ -1,0 +1,26 @@
+package forms
+
+import "family/web/components/inputs"
+import "family/types"
+import "family/web/components/icons"
+
+templ CreateRecipeItemForm(values types.CreateRecipeItemValues, errors types.CreateRecipeItemErrors) {
+	<form
+		class="grid gap-2"
+		hx-post="/ingredients/new"
+		hx-swap="outerHTML"
+	>
+		@inputs.Input(inputs.InputProps{
+			Type:        "text",
+			Name:        "name",
+			Placeholder: "Ingredient name",
+			Value:       values.Name,
+			Error:       errors.Name,
+			Label:       icons.IconCookie(),
+		})
+		if errors.Other != "" {
+			@inputs.InputError(errors.Other)
+		}
+		<button type="submit" class="btn btn-secondary font-semibold">Create ingredient</button>
+	</form>
+}

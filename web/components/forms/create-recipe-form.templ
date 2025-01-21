@@ -1,0 +1,28 @@
+package forms
+
+import "family/types"
+import "family/web/components/inputs"
+
+templ CreateRecipeForm(values types.CreateRecipeValues, errors types.CreateRecipeErrors) {
+	<form
+		class="grid gap-2"
+		hx-post="/recipe/create"
+		hx-swap="outerHTML"
+	>
+		@inputs.Input(inputs.InputProps{
+			Type:        "text",
+			Name:        "name",
+			Placeholder: "Recipe name",
+			Value:       values.Name,
+			Error:       errors.Name,
+		})
+		@inputs.InputTextarea(inputs.InputTextareaProps{
+			Name:        "description",
+			Label:       "Description",
+			Value:       values.Description,
+			Rows:        "6",
+			Placeholder: "Enter your recipe description",
+		})
+		<input type="hidden" name="ingredients" value=""/>
+	</form>
+}

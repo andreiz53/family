@@ -32,10 +32,12 @@ WHERE email = $1;
 
 -- name: UpdateUserEmail :exec
 UPDATE users
-SET email = $1
+SET email = $1,
+updated_at = NOW()
 WHERE id = $2;
 
 -- name: UpdateUserPassword :exec
 UPDATE users
-SET password = $1
+SET password = $1,
+updated_at = NOW()
 WHERE id = $2;

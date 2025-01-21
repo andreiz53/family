@@ -15,6 +15,16 @@ templ Header() {
 				if webUtils.LoggedIn(ctx) {
 					<li>
 						<details>
+							<summary>My kitchen</summary>
+							<ul class="bg-base-300 rounded-t-none p-2">
+								<li><a href="/recipe/create">Create recipe</a></li>
+								<li><a href="/ingredients">Ingredients</a></li>
+								<li><a href="/ingredients/new">New ingredient</a></li>
+							</ul>
+						</details>
+					</li>
+					<li>
+						<details>
 							<summary>{ user.Email }</summary>
 							<ul class="bg-base-300 rounded-t-none p-2">
 								<li><a href="/account/settings">Account Settings</a></li>

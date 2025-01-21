@@ -135,7 +135,8 @@ func (q *Queries) GetUsers(ctx context.Context) ([]User, error) {
 
 const updateUserEmail = `-- name: UpdateUserEmail :exec
 UPDATE users
-SET email = $1
+SET email = $1,
+updated_at = NOW()
 WHERE id = $2
 `
 
@@ -151,7 +152,8 @@ func (q *Queries) UpdateUserEmail(ctx context.Context, arg UpdateUserEmailParams
 
 const updateUserPassword = `-- name: UpdateUserPassword :exec
 UPDATE users
-SET password = $1
+SET password = $1,
+updated_at = NOW()
 WHERE id = $2
 `
 
