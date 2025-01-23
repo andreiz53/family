@@ -13,13 +13,12 @@ templ Header() {
 		<div class="flex-none">
 			<ul class="menu menu-horizontal px-1">
 				if webUtils.LoggedIn(ctx) {
+					<li><a href="/ingredients">Ingredients</a></li>
 					<li>
 						<details>
 							<summary>My kitchen</summary>
 							<ul class="bg-base-300 rounded-t-none p-2">
 								<li><a href="/recipe/create">Create recipe</a></li>
-								<li><a href="/ingredients">Ingredients</a></li>
-								<li><a href="/ingredients/new">New ingredient</a></li>
 							</ul>
 						</details>
 					</li>

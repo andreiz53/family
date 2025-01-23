@@ -13,6 +13,7 @@ import (
 type Storage interface {
 	UserStorage
 	RecipeItemStorage
+	IngredientStorage
 }
 
 type UserStorage interface {
@@ -32,6 +33,15 @@ type RecipeItemStorage interface {
 	GetRecipeItemByID(context.Context, pgtype.UUID) (database.RecipeItem, error)
 	GetRecipeItems(context.Context) ([]database.RecipeItem, error)
 	UpdateRecipeItem(context.Context, string) error
+}
+
+type IngredientStorage interface {
+	CreateIngredient(context.Context, string) error
+	GetIngredientByID(context.Context, pgtype.UUID) (database.Ingredient, error)
+	GetIngredients(context.Context) ([]database.Ingredient, error)
+	UpdateIngredient(context.Context, database.UpdateIngredientParams) error
+	DeleteIngredient(context.Context, pgtype.UUID) error
+	DeleteAllIngredients(context.Context) error
 }
 
 type Database struct {

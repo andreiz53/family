@@ -8,6 +8,13 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
+type Ingredient struct {
+	ID        pgtype.UUID
+	CreatedAt pgtype.Timestamp
+	UpdatedAt pgtype.Timestamp
+	Name      string
+}
+
 type RecipeItem struct {
 	ID        pgtype.UUID
 	CreatedAt pgtype.Timestamp

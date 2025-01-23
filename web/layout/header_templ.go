@@ -39,14 +39,14 @@ func Header() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if webUtils.LoggedIn(ctx) {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<li><details><summary>My kitchen</summary><ul class=\"bg-base-300 rounded-t-none p-2\"><li><a href=\"/recipe/create\">Create recipe</a></li><li><a href=\"/ingredients\">Ingredients</a></li><li><a href=\"/ingredients/new\">New ingredient</a></li></ul></details></li><li><details><summary>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<li><a href=\"/ingredients\">Ingredients</a></li><li><details><summary>My kitchen</summary><ul class=\"bg-base-300 rounded-t-none p-2\"><li><a href=\"/recipe/create\">Create recipe</a></li></ul></details></li><li><details><summary>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var2 string
 			templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(user.Email)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/layout/header.templ`, Line: 28, Col: 28}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/layout/header.templ`, Line: 27, Col: 28}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 			if templ_7745c5c3_Err != nil {
