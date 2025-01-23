@@ -7,7 +7,7 @@ import (
 	"family/web/pages"
 	accountPages "family/web/pages/account"
 	ingredientsPages "family/web/pages/ingredients"
-	recipePages "family/web/pages/recipe"
+	recipePages "family/web/pages/recipes"
 )
 
 func (s Server) renderIndex(w http.ResponseWriter, r *http.Request) {
@@ -38,15 +38,15 @@ func (s Server) renderRecipeCreate(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s Server) renderIngredientsIndex(w http.ResponseWriter, r *http.Request) {
-	recipeItems, err := s.store.GetRecipeItems(r.Context())
+	ingredients, err := s.store.GetIngredients(r.Context())
 	if err != nil {
 		logError("could not get ingredients from store", err)
-		Redirect(w, r, "/ingredients/new")
+		Redirect(w, r, "/")
 		return
 	}
-	RenderComponent(w, r, ingredientsPages.IngredientsIndex(types.DBRecipeItemsToRecipeItems(recipeItems)))
+	RenderComponent(w, r, ingredientsPages.IngredientsIndex(types.DBIngredientsToIngredients(ingredients)))
 }
 
-func (s Server) renderIngredientCreate(w http.ResponseWriter, r *http.Request) {
-	RenderComponent(w, r, ingredientsPages.IngredientCreate())
+func (s Server) renderRecipesIndex(w http.ResponseWriter, r *http.Request) {
+	RenderComponent(w, r, recipePages.RecipesIndex())
 }

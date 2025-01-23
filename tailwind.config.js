@@ -1,4 +1,3 @@
-const { default: daisyui } = require("daisyui");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -9,5 +8,5 @@ module.exports = {
   daisyui: {
     themes: ["night"],
   },
-  plugins: [require("daisyui")],
+  plugins: [],
 };

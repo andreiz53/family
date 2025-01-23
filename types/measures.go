@@ -1,9 +1,11 @@
 package types
 
 const (
-	MeasureTypeGram       = "g"
-	MeasureTypeMillilitre = "mL"
-	MeasureTypeTablespoon = "tbsp"
-	MeasureTypeTeaspoon   = "tsp"
-	MeasureTypePiece      = "pc"
+	MeasureTypeGram       MeasureType = "g"
+	MeasureTypeMillilitre MeasureType = "mL"
+	MeasureTypeTablespoon MeasureType = "tbsp"
+	MeasureTypeTeaspoon   MeasureType = "tsp"
+	MeasureTypePiece      MeasureType = "pc"
 )
+
+type MeasureType string

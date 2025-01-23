@@ -15,12 +15,7 @@ templ Header() {
 				if webUtils.LoggedIn(ctx) {
 					<li><a href="/ingredients">Ingredients</a></li>
 					<li>
-						<details>
-							<summary>My kitchen</summary>
-							<ul class="bg-base-300 rounded-t-none p-2">
-								<li><a href="/recipe/create">Create recipe</a></li>
-							</ul>
-						</details>
+						<a href="/recipes">Recipes</a>
 					</li>
 					<li>
 						<details>

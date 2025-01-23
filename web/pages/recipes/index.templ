@@ -1,0 +1,10 @@
+package recipePages
+
+import "family/web/layout"
+
+templ RecipesIndex() {
+	@layout.Base() {
+		<h1>Hello from recipes index</h1>
+		<a href="/recipes/create" class="btn btn-primary">New recipe</a>
+	}
+}

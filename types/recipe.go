@@ -7,7 +7,6 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 
 	database "family/database/handlers"
-	"family/utils"
 	"family/validate"
 )
 
@@ -16,15 +15,17 @@ type Recipe struct {
 	Name           string
 	CookingProcess string
 	Description    string
-	Ingredients    []RecipeItem
+	Items          []RecipeItem
+	VideoURL       string
 }
 
 type RecipeItem struct {
-	ID        pgtype.UUID
-	Name      string
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt *time.Time
+	ID           pgtype.UUID
+	Ingredient   Ingredient
+	Quantity     float64
+	QuantityType MeasureType
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
 }
 
 type CreateRecipeValues struct {
@@ -78,8 +79,6 @@ func DBRecipeItemToRecipeItem(dbItem database.RecipeItem) RecipeItem {
 		ID:        dbItem.ID,
 		CreatedAt: dbItem.CreatedAt.Time,
 		UpdatedAt: dbItem.UpdatedAt.Time,
-		DeletedAt: utils.NullTime(dbItem.DeletedAt),
-		Name:      dbItem.Name,
 	}
 }
 
